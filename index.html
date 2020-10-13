@@ -23,17 +23,17 @@
         <div id="meds">Loading...</div>
         <script type="text/javascript">
             FHIR.oauth2.ready().then(function(client) {
-                
-                console.log(client.patient)
+                client.request("Patient")
+                console.log(client.request("Patient"))
                 // Render the current patient (or any error)
-                client.patient.read().then(
-                    function(pt) {
-                        document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
-                    },
-                    function(error) {
-                        document.getElementById("patient").innerText = error.stack;
-                    }
-                );
+                // client.patient.read().then(
+                //     function(pt) {
+                //         document.getElementById("patient").innerText = JSON.stringify(pt, null, 4);
+                //     },
+                //     function(error) {
+                //         document.getElementById("patient").innerText = error.stack;
+                //     }
+                // );
                 
                 // // Get MedicationRequests for the selected patient
                 // client.request("/MedicationRequest?patient=" + client.patient.id, {
@@ -60,7 +60,7 @@
                 //     }
                 // );
 
-            }).catch(console.error);
+            }).then(console.log).catch(console.error);
         </script>
     </body>
 </html>
